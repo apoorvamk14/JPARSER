@@ -1,4 +1,4 @@
-var text = "falsenull123";
+var text = ["hey", 1234];
 var nullo = function(text) {
   if (/^null/.test(text)) {
     var temp = text.slice(4);
@@ -16,7 +16,33 @@ var bool = function(text) {
   } else return null;
 };
 
-var number = function(text) {};
+var string = function(text) {
+  if (/(([^"\\]*|["\\\\bfnrt\/])|(\\u[0-9a-f]){4})*"$/.test(text)) {
+    let temp = /([^"\\]*|["\\\\bfnrt\/]|\\u[0-9a-f]{4})*"$/.exec(text);
+    let temp2 = text.slice(temp[0].length);
+    return temp2.length === 0 ? [temp[0]] : [temp[0], temp2];
+  } else return null;
+};
 
-var abc = bool(text);
+var number = function(text) {
+  if (/^(-?[1-9]*|0)([1-9][0-9])*\.\d+([eE][-+]?\d+)?/.test(text)) {
+    let temp = /^(-?[1-9]*|0)([1-9][0-9])*\.\d+([eE][-+]?\d+)?/.exec(text);
+    let temp2 = text.slice(temp[0].length);
+    return temp2.length === 0 ? [temp[0]] : [temp[0], temp2];
+  } else return null;
+};
+
+var arr = function(text) {
+  if (/^\[.+\]$/.test(text)) {
+    console.log("control here");
+    for (let i = 0; i < text.length; i++) {
+      if (string(text[i])) {
+        string(text[i]);
+      } else if (number[text[i]]) {
+        number(text[i]);
+      } else return null;
+    }
+  }
+};
+var abc = arr(text);
 console.log(abc);
