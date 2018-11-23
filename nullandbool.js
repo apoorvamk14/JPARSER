@@ -1,4 +1,4 @@
-var text = ["hey", 1234];
+var text = [];
 var nullo = function(text) {
   if (/^null/.test(text)) {
     var temp = text.slice(4);
@@ -32,17 +32,4 @@ var number = function(text) {
   } else return null;
 };
 
-var arr = function(text) {
-  if (/^\[.+\]$/.test(text)) {
-    console.log("control here");
-    for (let i = 0; i < text.length; i++) {
-      if (string(text[i])) {
-        string(text[i]);
-      } else if (number[text[i]]) {
-        number(text[i]);
-      } else return null;
-    }
-  }
-};
-var abc = arr(text);
-console.log(abc);
+arr(text);
